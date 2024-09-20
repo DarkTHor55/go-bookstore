@@ -1,14 +1,12 @@
 package main
 
 import (
-    "log"
-    "net/http"
-	"github.com/DarkTHor55/go-bookstore/pkg/routes"
-	"gorm.io/driver/mysql"
-	"github.com/gorilla/mux"
+	"log"
+	"net/http"
+	"github.com/DarkTHor55/go-bookstore/pkg/router"
 )
+
 func main() {
-	r:=mux.NewRouter()
-	routers.RegisterBookStoreRouter(r)
-	log.fatal(http.ListenAndServe("localhost:8000",r))
+	r := router.RegisterBookStoreRoutes()
+	log.Fatal(http.ListenAndServe("localhost:8001", r))
 }
