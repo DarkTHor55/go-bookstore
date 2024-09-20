@@ -1,37 +1,44 @@
 package models
+
 import (
-	"github.com/dARKthOR55/go-bookstore/pkg/config"
+	"github.com/DarkTHor55/go-bookstore/pkg/config"
 	"gorm.io/gorm"
 )
-var db *gorm.db
-type Book struct{
-	gorm.model
-	Name string `gorm:""json:"name"`
-	Author string `json:"author"
-	Publication string `json:"publication"`
+
+var db *gorm.DB 
+
+type Book struct {
+	gorm.Model
+	Name        string `gorm:"type:varchar(100)" json:"name"`
+	Author      string `gorm:"type:varchar(100)" json:"author"`
+	Publication string `gorm:"type:varchar(100)" json:"publication"`
 }
-func init(){
-	config.Connect()
-	db=config.GetDB()
-	db.AutoMigrate(&Book{})
+
+func init() {
+	config.Connect() 
+	db = config.GetDB() 
+	db.AutoMigrate(&Book{}) 
 }
-func(b *Book)CreateBook()*Book{
-	db.NewRecord(b)
+
+func (b *Book) CreateBook() *Book {
 	db.Create(&b)
 	return b
 }
-func GetAllBooks()[]Book{
+
+func GetAllBooks() []Book {
 	var books []Book
-	db.Find(&Books)
+	db.Find(&books) 
 	return books
 }
-func GetBookById(Id int64 )*Book,gorm.DB{
+
+func GetBookById(Id int64) (*Book, *gorm.DB) { 
 	var getBook Book
-	db:=db.where("id=?",Id).Find(&getBook)
-	return &getBook,db
+	db := db.Where("id = ?", Id).Find(&getBook) 
+	return &getBook, db
 }
-func delBook(Id int64)Book{
+
+func DeleteBook(Id int64) Book { 
 	var book Book
-	db.where("id=?",Id).Delete(&book)
+	db.Where("id = ?", Id).Delete(&book) 
 	return book
 }

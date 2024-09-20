@@ -1,13 +1,18 @@
 package utils
+
 import (
 	"encoding/json"
+	"io/ioutil"
 	"net/http"
-	"io"
 )
-func ParseBody(r *http.Request ,x interface{}){
-	if body ,err:=io.ReadAll(r.body); err == nil{
-		if err := json.Inmarshal([]byte(body),x); err != nil{
-			return 
-		}
+
+func ParseBody(r *http.Request, x interface{}) {
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		return
+	}
+	err = json.Unmarshal(body, x) // convert json data  to struct 
+	if err != nil {
+		return
 	}
 }

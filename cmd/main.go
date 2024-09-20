@@ -3,7 +3,7 @@ package main
 import (
     "log"
     "net/http"
-	"github.com/DarkTHor55/go-bookstore/pkg/routers"
+	"github.com/DarkTHor55/go-bookstore/pkg/routes"
 	"gorm.io/driver/mysql"
 	"github.com/gorilla/mux"
 )
